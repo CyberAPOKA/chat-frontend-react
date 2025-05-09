@@ -1,0 +1,10 @@
+{
+    "home": {
+        "welcome": "Welcome to the Dashboard 1"
+    },
+    "login": {
+        "email": "Email 2",
+        "password": "Password 3",
+        "submit": "Login 4"
+    }
+}

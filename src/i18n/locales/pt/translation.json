@@ -1,0 +1,10 @@
+{
+    "home": {
+        "welcome": "Bem-vindo ao Painel"
+    },
+    "login": {
+        "email": "Email",
+        "password": "Senha",
+        "submit": "Entrar"
+    }
+}
