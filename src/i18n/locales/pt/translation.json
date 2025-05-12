@@ -1,10 +1,21 @@
 {
+    "settings": "Configurações",
     "home": {
-        "welcome": "Bem-vindo ao Painel"
+        "welcome": "Bem-vindo ao Labzz App.",
+        "description": "Envie e receba mensagens em tempo real com seus amigos e familiares.",
+        "protected": "Protegido com a criptografia de ponta a ponta"
     },
     "login": {
         "email": "Email",
         "password": "Senha",
         "submit": "Entrar"
+    },
+    "user": {
+        "data": "Dados do Usuário",
+        "name": "Nome",
+        "email": "Email",
+        "password": "Senha",
+        "confirmPassword": "Confirmar Senha",
+        "submit": "Cadastrar"
     }
 }

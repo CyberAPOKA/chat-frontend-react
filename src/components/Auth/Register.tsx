@@ -5,7 +5,6 @@ import { Button } from "primereact/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/lib/axios";
-import { getCookie } from "@/utils/cookies";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -25,27 +24,12 @@ export default function Register() {
     try {
       await api.get("/sanctum/csrf-cookie");
 
-      const token = getCookie("XSRF-TOKEN");
-
-      if (!token) {
-        alert("Erro ao obter token CSRF.");
-        return;
-      }
-
-      await api.post(
-        "/register",
-        {
-          name: form.name,
-          email: form.email,
-          password: form.password,
-          password_confirmation: form.confirmPassword,
-        },
-        {
-          headers: {
-            "X-XSRF-TOKEN": decodeURIComponent(token),
-          },
-        }
-      );
+      await api.post("/register", {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        password_confirmation: form.confirmPassword,
+      });
 
       console.log("Cadastro realizado com sucesso");
       router.push("/");

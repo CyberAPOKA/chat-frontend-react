@@ -2,7 +2,6 @@
 
 import { Button } from "primereact/button";
 import api from "@/lib/axios";
-import { getCookie } from "@/utils/cookies";
 import { useRouter } from "next/navigation";
 
 export default function LogoutButton() {
@@ -12,21 +11,7 @@ export default function LogoutButton() {
     try {
       await api.get("/sanctum/csrf-cookie");
 
-      const token = getCookie("XSRF-TOKEN");
-      if (!token) {
-        alert("Erro ao obter token CSRF para logout.");
-        return;
-      }
-
-      await api.post(
-        "/logout",
-        {},
-        {
-          headers: {
-            "X-XSRF-TOKEN": decodeURIComponent(token),
-          },
-        }
-      );
+      await api.post("/logout");
 
       router.push("/login");
     } catch (err) {

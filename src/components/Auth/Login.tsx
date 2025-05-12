@@ -1,11 +1,10 @@
 "use client";
 
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/lib/axios";
-import { getCookie } from "@/utils/cookies";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,30 +15,15 @@ export default function Login() {
     try {
       await api.get("/sanctum/csrf-cookie");
 
-      const token = getCookie("XSRF-TOKEN");
+      await api.post("/login", {
+        email,
+        password,
+      });
 
-      if (!token) {
-        console.error("CSRF token não encontrado no cookie.");
-        alert("Erro ao obter token CSRF.");
-        return;
-      }
-
-      await api.post(
-        "/login",
-        { email, password },
-        {
-          headers: {
-            "X-XSRF-TOKEN": decodeURIComponent(token),
-          },
-        }
-      );
-
-      console.log("Login bem-sucedido");
-      
+      console.log("Login com sucesso");
       router.push("/");
-    } catch (err) {
-      console.error("Erro no login:", err);
-      alert("Login inválido");
+    } catch (error) {
+      console.error("Erro no login:", error);
     }
   };
 

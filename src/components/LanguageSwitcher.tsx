@@ -4,17 +4,30 @@ import { useTranslation } from "react-i18next";
 import { Dropdown } from "primereact/dropdown";
 import { useState, useEffect } from "react";
 import i18n from "@/i18n";
+import Image from "next/image";
 
 type LanguageOption = {
   code: string;
   label: string;
+  flag: string;
 };
 
 const languages: LanguageOption[] = [
-  { code: "pt", label: "Português" },
-  { code: "en", label: "English" },
-  { code: "es", label: "Español" },
+  { code: "pt", label: "Português", flag: "/flags/pt.png" },
+  { code: "en", label: "English", flag: "/flags/en.png" },
+  { code: "es", label: "Español", flag: "/flags/es.png" },
 ];
+
+function LanguageItemTemplate(option?: LanguageOption | null) {
+  if (!option) return null;
+
+  return (
+    <div className="flex items-center gap-2">
+      <Image src={option.flag} alt={option.label} width={20} height={15} />
+      <span>{option.label}</span>
+    </div>
+  );
+}
 
 export default function LanguageSwitcher() {
   const { i18n: i18nInstance } = useTranslation();
@@ -40,6 +53,8 @@ export default function LanguageSwitcher() {
       optionLabel="label"
       placeholder="Idioma"
       className="w-full"
+      itemTemplate={LanguageItemTemplate} // lista suspensa
+      valueTemplate={LanguageItemTemplate} // valor selecionado
     />
   );
 }
