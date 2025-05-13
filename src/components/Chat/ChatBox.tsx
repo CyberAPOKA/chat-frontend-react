@@ -7,6 +7,7 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { useChatStore } from "@/store/chatStore";
+import { useRouter } from "next/navigation";
 
 type Message = {
   id: string;
@@ -38,6 +39,7 @@ export default function ChatBox({ conversationId }: ChatBoxProps) {
     name: string;
     profile_photo_url?: string;
   } | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (conversationId) setSelectedConversationId(conversationId);
@@ -107,6 +109,19 @@ export default function ChatBox({ conversationId }: ChatBoxProps) {
     setMessages(sorted);
   };
 
+  const markConversationAsRead = async () => {
+    try {
+      await api.post(`/api/conversations/${conversationId}/read`);
+      refreshUserList();
+    } catch (err) {
+      console.error("Erro ao marcar como lida:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (conversationId) markConversationAsRead();
+  }, [conversationId]);
+
   const handleSend = async () => {
     if (!newMessage.trim() || !pusherRef.current) return;
 
@@ -142,7 +157,6 @@ export default function ChatBox({ conversationId }: ChatBoxProps) {
 
   return (
     <div className="relative h-full flex flex-col md:ml-80 lg:ml-96 overflow-hidden">
-  
       <div
         className="absolute inset-0 bg-center opacity-20 pointer-events-none"
         style={{
@@ -154,6 +168,7 @@ export default function ChatBox({ conversationId }: ChatBoxProps) {
 
       <div className="relative z-10 flex flex-col h-full">
         <div className="bg-white p-4 flex items-center gap-3 border-b">
+          <Button icon="pi pi-arrow-left" onClick={() => router.back()} />
           {conversationUser && (
             <>
               <img

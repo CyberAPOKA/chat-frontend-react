@@ -56,13 +56,7 @@ export default function UpdatePhotoForm() {
         {profilePhotoUrl && (
           <div className="mb-4">
             <p>Foto atual:</p>
-            {/* <Image
-              src={profilePhotoUrl}
-              alt="Foto de perfil"
-              width={150}
-              height={96}
-            /> */}
-            <img src={profilePhotoUrl} alt="Foto de perfil" className="w-80"/>
+            <img src={profilePhotoUrl} alt="Foto de perfil" className="w-28 md:w-40 lg:w-80"/>
           </div>
         )}
       </div>

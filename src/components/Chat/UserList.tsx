@@ -13,6 +13,7 @@ type User = {
   last_message?: string;
   last_message_at?: string;
   conversation_id?: string;
+  has_unread?: boolean;
 };
 
 export default function UserList() {
@@ -72,7 +73,12 @@ export default function UserList() {
             className="w-10 h-10 rounded-full"
           />
           <div className="truncate overflow-hidden text-ellipsis whitespace-nowrap">
-            <p className="font-medium">{user.name}</p>
+            <p className="font-medium flex items-center gap-1">
+              {user.name}
+              {user.has_unread && (
+                <span className="w-2 h-2 bg-blue-500 rounded-full inline-block"></span>
+              )}
+            </p>
             <p className="text-xs text-gray-500">{user.last_message}</p>
           </div>
         </div>

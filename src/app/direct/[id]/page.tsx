@@ -19,7 +19,7 @@ type Message = {
 };
 
 export default function DirectConversation() {
-  const { id } = useParams(); // id = conversation UUID
+  const { id } = useParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentUserId, setCurrentUserId] = useState<string>("");
 
@@ -64,15 +64,21 @@ export default function DirectConversation() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      <div className="flex-1">
-        <ChatBox
-          conversationId={id as string}
-          currentUserId={currentUserId}
-          messages={messages}
-          onSendMessage={handleSendMessage}
-        />
+    <div>
+      <div className="hidden md:flex">
+        <Sidebar />
       </div>
+      <div className="flex h-screen overflow-hidden">
+        <div className="flex-1">
+          <ChatBox
+            conversationId={id as string}
+            currentUserId={currentUserId}
+            messages={messages}
+            onSendMessage={handleSendMessage}
+          />
+        </div>
+      </div>
+      <BottomNavigation />
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function LeftBar() {
           />
         </Link>
       </div>
-      <div className="flex flex-col gap-y-4 items-center">
+      <div className="flex flex-col gap-y-4 items-center mb-20 md:mb-0">
         <Config />
       </div>
     </div>

@@ -53,8 +53,8 @@ export default function LanguageSwitcher() {
       optionLabel="label"
       placeholder="Idioma"
       className="w-full"
-      itemTemplate={LanguageItemTemplate} // lista suspensa
-      valueTemplate={LanguageItemTemplate} // valor selecionado
+      itemTemplate={LanguageItemTemplate}
+      valueTemplate={LanguageItemTemplate}
     />
   );
 }

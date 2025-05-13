@@ -1,11 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import Config from "./Config";
 
 export default function BottomNavigation() {
   return (
     <div className="md:hidden fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200">
       <div className="grid h-full max-w-lg grid-cols-2 mx-auto font-medium">
+        <Link
+          href="/user"
+          className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
+        >
+          <i className="pi pi-user"></i>
+          <span className="text-sm text-gray-500 group-hover:text-blue-600">
+            Dados
+          </span>
+        </Link>
         <Link
           href="/"
           className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
@@ -15,7 +25,7 @@ export default function BottomNavigation() {
             Conversas
           </span>
         </Link>
-        <Link
+        {/* <Link
           href="/settings"
           className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
         >
@@ -23,7 +33,7 @@ export default function BottomNavigation() {
           <span className="text-sm text-gray-500 group-hover:text-blue-600">
             Settings
           </span>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
